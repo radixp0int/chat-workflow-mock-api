@@ -1,0 +1,51 @@
+{
+  "name": "chat-workflow-mock-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NestJS mock API for streaming chat and interactive workflow demos.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "dev": "tsx watch src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --deny-warnings .",
+    "lint:fix": "oxlint --fix --deny-warnings .",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check:conflicts": "node scripts/check-conflicts.mjs",
+    "check": "npm run check:conflicts && npm run lint && npm run format:check && npm run typecheck && npm test",
+    "prepare": "node scripts/prepare.mjs",
+    "check:protocol": "node scripts/check-protocol.mjs"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.0"
+  },
+  "lint-staged": {
+    "*.{ts,js,mjs}": [
+      "oxlint --fix --deny-warnings",
+      "oxfmt --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{json,md,yml,yaml}": "oxfmt --write --no-error-on-unmatched-pattern"
+  },
+  "engines": {
+    "node": ">=22.14.0"
+  }
+}
